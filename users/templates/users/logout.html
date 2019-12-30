@@ -1,0 +1,9 @@
+{% extends 'mtdb/base.html' %}
+
+{% block content %}
+<form action="{% url 'users:logout' %}" , method="POST">
+    {% csrf_token %}
+    {{ form }}
+    <button class="btn btn-outline-primary" type="submit">Logout</button>
+</form>
+{% endblock %}

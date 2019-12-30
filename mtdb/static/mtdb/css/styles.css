@@ -1,0 +1,361 @@
+/**********************************************
+********General styles / utilities*************
+**********************************************/
+
+body {
+  background: #fafafa;
+  color: #333333;
+  /* margin-top: 5rem; */
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.hide {
+    display: none;
+}
+
+.custom-file-label {
+    white-space: nowrap;
+}
+
+.invalid-feedback {
+    margin-bottom: 0px;
+    padding-left: 3px;
+    font-weight: bold;
+}
+
+ul.errorlist.nonfield {
+    margin: 0
+}
+
+.list-group-item {
+    text-align: center;
+}
+/**********************************************
+********Navbar and Content div styles**********
+**********************************************/
+
+.bg-nav {
+    background-color: #0a6986bd;
+    /* background-color: #41879c; */
+}
+
+.navbar-text {
+    margin-right: .5rem;
+}
+
+.sidebar-div {
+    background: #ffffff;
+    border: 1px solid #dddddd;
+    padding: 10px 20px;
+    border-radius: 3px;
+    margin-bottom: 10px;
+}
+
+.sidebar-header {
+    text-align: center;
+    margin-bottom: .6rem;
+}
+
+.content-div {
+    background: #ffffff;
+    border: 1px solid #dddddd;
+    padding: 10px 20px;
+    border-radius: 3px;
+    margin-bottom: 10px;
+}
+
+/**********************************************
+**************Main/Index page styles***********
+**********************************************/
+
+h3.welcome {
+    font-family: 'Roboto', serif;
+}
+
+.table-striped tbody tr:nth-of-type(even) {
+  background-color: rgba(0, 0, 0, .05);
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.table-header tr{
+    background-color: rgba(0,0,0,0.05);
+    font-size: 16px;
+}
+
+.table-header tr th {
+    cursor: pointer;
+    position: relative;
+}
+
+span.sort-icon {
+    display: none;
+}
+
+th:hover span.sort-icon {
+    display: inline-block;
+    position: absolute;
+    right: 5px;
+}
+
+/**********************************************
+***********Register/Login page styles**********
+**********************************************/
+
+.user-link {
+    vertical-align: -webkit-baseline-middle;
+}
+
+.auth-img {
+    width: 65px;
+    float: right;
+    margin-bottom: 5px;
+}
+
+p.form-header {
+    margin-bottom: 5px;
+    font-size: 1.5rem;
+    display: inline-block;
+    margin-top: 7px
+}
+
+/**********************************************
+************Profile page styles****************
+**********************************************/
+
+.account-img {
+  height: 85px;
+  width: 85px;
+  margin-right: 15px;
+  margin-bottom: 10px;
+}
+
+/**********************************************
+************Review form page styles************
+**********************************************/
+
+.radio-wrap {
+    margin: 5px;
+    text-align: left;
+}
+
+div.rating-label {
+    margin-bottom: 5px;
+}
+
+.btn-add {
+    margin-top: .5rem;
+    margin-bottom: .5rem
+}
+
+.btn-del {
+    vertical-align: middle;
+    width: 40px;
+    height: calc(1.5em + .75rem + 4px);
+    text-align: center;
+    padding-top: 7px;
+}
+
+.review-input {
+    width: 93%
+}
+
+.review-input-label {
+    width: 93%;
+}
+
+.preview {
+    overflow: auto;
+}
+
+img.img-thumbnail {
+    width: 175px
+}
+
+/**********************************************
+************Gym detail page styles************
+**********************************************/
+
+p.content {
+    white-space: pre-line
+}
+
+.review-entry {
+    margin-top: 15px;
+}
+
+div.other-ratings {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap
+}
+
+.training-dates {
+    margin-top: .5rem;
+    clear: both;
+}
+
+span.rating-name, span.rating-name-overall {
+    margin-right: 5px;
+}
+
+.gym-header {
+    margin-bottom: 10px;
+}
+
+div.thumbnail {
+    width: 190px;
+    height: 105px;
+    padding: .25rem;
+    border: 1px solid #dee2e6;
+    border-radius: .25rem;
+    display: inline-block; /* makes it fit in like an <img> */
+    background-size: cover; /* or contain */
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-origin: content-box
+}
+
+div.thumbnail-sm {
+    width: 190px;
+    height: 105px;
+    padding: .25rem;
+    border: 1px solid #dee2e6;
+    border-radius: .25rem;
+    display: inline-block; /* makes it fit in like an <img> */
+    background-size: cover; /* or contain */
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-origin: content-box
+}
+
+.thumbnail:hover {
+    box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+
+.gym-info {
+    overflow: hidden;
+}
+
+.review-profile-img {
+    height: 65px;
+    width: 65px;
+    float: left;
+    margin-right: 1rem;
+}
+
+.form-label {
+    margin-bottom: .5rem;
+}
+
+a.update-review, a.delete-review {
+    font-size: 1.2rem;
+}
+
+i.edit, i.delete {
+    float: right;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.like-form {
+    float: right;
+}
+
+.btn-icon {
+    margin: 0px 2px;
+    padding: 0px 2px;
+    border: none;
+    background: none;
+}
+
+p.user-date {
+    padding-top: 7px;
+}
+
+/**********************************************
+**************MEDIA QUERIES********************
+**********************************************/
+
+@media only screen and (max-width: 1200px){
+    span.rating-star {
+        width: 31%
+    }
+    span.rating-name{
+        width: 13%
+    }
+    .review-input {
+        width: 90%
+    }
+    .review-input-label {
+        width: 90%;
+    }
+    th:hover span.sort-icon {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 992px){
+    span.rating-star {
+        width: 80%
+    }
+    span.rating-name{
+        width: 20%
+    }
+    span.rating-name-overall {
+        display: block;
+        margin-bottom: 3px;
+    }
+    .gym-images {
+        text-align: center;
+    }
+}
+
+@media only screen and (max-width: 767px){
+    img.img-logo {
+        max-width: 50%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .review-input {
+        width: 88%
+    }
+    .review-input-label {
+        width: 88%;
+    }
+}
+
+@media only screen and (max-width: 465px){
+    thead.table-header > tr > th {
+        font-size: 12px
+    }
+    tbody.table-body > tr > td {
+    font-size: 12px
+    }
+    .hide-small {
+        display: none;
+    }
+    div.thumbnail {
+        width: 142px;
+        height: 79px;
+    }
+    nav.navbar {
+        position: static
+    }
+    .review-input {
+        width: 84%
+    }
+    .review-input-label {
+        width: 84%;
+    }
+}

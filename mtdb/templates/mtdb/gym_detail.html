@@ -1,0 +1,152 @@
+{% extends 'mtdb/base.html' %}
+{% load static %}
+{% load myfilters %}
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{% static 'mtdb/ekko/ekko-lightbox.css' %}">
+{% endblock %}
+{% block title %}{{ object.name }}{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-3">
+        <div class="sidebar-div my-2 text-truncate">
+            <h4 class="gym-header">{{ object.name }}</h4>
+            <p>Website</p>
+            <p>Instagram</p>
+            <p>Twitter</p>
+            <p>Map</p>
+            <p>Other Info</p>
+        </div>
+    </div>
+    <div class="col-md-9">
+        {% if gym_images %}
+            <div class="content-div my-2">
+                <h4>Gym Photos</h4>
+                <div class="gym-images">
+                    {% for img in gym_images %}
+                        <a target="_blank" href="{{ img.image.url }}" style="text-decoration: none" data-toggle="lightbox" data-gallery="gym-gallery">
+                            <div class="thumbnail" style="background-image: url({{ img.image.url }});"></div>
+                        </a>
+                        <!-- <img src="{{ img.image.url }}" class="img-thumbnail"> -->
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+        <div class="content-div my-2">
+            <h4>Gym Reviews</h4>
+            {% if reviews %}
+                {% for review in reviews %}
+                <div class="review-entry">
+                    <div class="profile-wrapper">
+                        <img src="{{ review.author.profile.image.url }}" class="rounded-circle review-profile-img">
+                        {% if request.user == review.author %}
+                        <span class="review-icons">
+                            <a href="#" class="delete-review" data-toggle="modal" data-target="#modal-{{ review.id }}">
+                                <i class="far fa-trash-alt delete"></i>
+                            </a>
+                            <a href="{% url 'update_review' review.id %}" class="update-review"><i class="far fa-edit edit"></i></a>
+                        </span>
+                        {% endif %}
+                        <p class="user-date">{{ review.author }} <br>
+                        <i>{{ review.date_created|date:"DATE_FORMAT"}}</i></p>
+                    </div>
+                    {% if review.start_date and review.end_date %}
+                    <div class="training-dates text-muted">
+                        Trained from {{ review.start_date|date:"SHORT_DATE_FORMAT" }} - {{ review.end_date|date:"SHORT_DATE_FORMAT" }}
+                    </div>
+                    {% endif %}
+                    <div class="overall-ratings my-1">
+                        <span class="rating-name-overall">Overall Rating: </span><span class="rating-star">{{ review.rating_overall}}</span>
+                    </div>
+                    <div class="other-ratings my-1">
+                        <span class="rating-name">Training:</span><span class="rating-star">{{ review.rating_training}}</span>
+                        <span class="rating-name">Facilities:</span><span class="rating-star">{{ review.rating_facility}}</span>
+                        <span class="rating-name">Location:</span><span class="rating-star">{{ review.rating_location}}</span>
+                        <span class="rating-name">Cost:</span><span class="rating-star">{{ review.rating_cost}}</span>
+                    </div>
+                    <p class="content">{{ review.content }}</p>
+                    {% if review.images.all %}
+                        <div class="review-images">
+                            {% for image in review.images.all %}
+                                <a target="_blank" href="{{ image.image.url }}" style="text-decoration: none" data-toggle="lightbox"
+                                    data-gallery="{{ review.id }}-gallery">
+                                    <div class="thumbnail-sm" style="background-image: url({{ image.image.url }});"></div>
+                                </a>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    <div class="like-wrapper">
+                        {% if user.is_authenticated %}
+                            {% has_liked request.user.id review.id as like_flag %}
+                            {% if like_flag %}
+                            <p id="likeFlag_{{ review.id }}" class="like-flag" style="display: none;">true</p>
+                            {% else %}
+                            <p id="likeFlag_{{ review.id }}" class="like-flag" style="display: none;">false</p>
+                            {% endif %}
+                        {% endif %}
+                        <form action="{% url 'unlike_review' review.id %}" method="POST" class="like-form" id="unlikeForm_{{ review.id }}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn-icon">
+                                <i class="far fa-thumbs-down fa-lg"></i>
+                            </button>
+                        </form>
+                        <form action="{% url 'like_review' review.id %}" method="POST" class="like-form" id="likeForm_{{ review.id }}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn-icon">
+                                <i class="far fa-thumbs-up fa-lg"></i>
+                            </button>
+                        </form>
+                        <div class="like-text-span">
+                            <span class='like-counter' id="counterFor_{{ review.id }}">
+                                {{ review.like_count }} p{{ review.like_count|pluralize:"erson,eople" }} liked this review
+                            </span>
+                            <span class='like-error float-right mx-3' id="errorFor_{{ review.id }}"></span>
+                        </div>
+                    </div>
+                </div>
+                {% if reviews|length > 1 %}
+                    <hr>
+                {% endif %}
+                <!-- Modal -->
+                <div class="modal fade" id="modal-{{ review.id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="deleteModalLabel">Delete confirmation</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Are you sure you want to delete your review?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <form action="{% url 'delete_review' review.id %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-primary">Delete</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal -->
+                {% endfor %}
+            {% else %}
+                <p class="mt-3 mb-1">Currently No Reviews</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+    <script src="{% static 'mtdb/js/stars.js' %}"></script>
+    <script src="{% static 'mtdb/js/ajaxLikeUnlike.js' %}"></script>
+    <script src="{% static 'mtdb/ekko/ekko-lightbox.min.js' %}"></script>
+    <script>
+        $(document).on('click', '[data-toggle="lightbox"]', function (event) {
+            event.preventDefault();
+            $(this).ekkoLightbox();
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'mtdb/base.html' %}
+{% load static %}
+{% load myfilters %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6 col-xl-5">
+        <div class="content-div">
+            <div class="form-header border-bottom mb-3">
+                <p class="form-header">Login</p>
+                <img src="{% static 'mtdb/img/login.png' %}" class="img-fluid auth-img">
+                <div style="clear: left;"></div>
+            </div>
+            <form action="{% url 'users:login' %}" , method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="{{ form.username.id_for_label }}">Username* </label>
+                    {{ form.username|addclass:'form-control' }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.password.id_for_label }}">Password* </label>
+                    {{ form.password|addclass:'form-control' }}
+                </div>
+                <div class="form-group">
+                    <small class="user-link text-muted">
+                        Need an Account? <a href="{% url 'users:register' %}">Sign Up</a>
+                    </small>
+                    <button class="btn btn-outline-info float-right" type="submit">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

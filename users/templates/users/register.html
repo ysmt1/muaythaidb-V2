@@ -1,0 +1,26 @@
+{% extends 'mtdb/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="content-div">
+            <div class="form-header border-bottom mb-3">
+                <p class="form-header">Register </p>
+                <img src="{% static 'mtdb/img/register.png' %}" class="img-fluid auth-img">
+                <div style="clear: both;"></div>
+            </div>
+            <form action="{% url 'users:register' %}" , method="POST">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <div class="form-group">
+                    <small class="user-link text-muted">
+                        Already Have An Account? <a href="{% url 'users:login' %}">Sign In</a>
+                    </small>
+                    <button class="btn btn-outline-info float-right" type="submit">Register</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

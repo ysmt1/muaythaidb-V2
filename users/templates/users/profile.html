@@ -1,0 +1,106 @@
+{% extends 'mtdb/base.html' %}
+{% load myfilters %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="content-div">
+            <div class="media">
+                <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+                <div class="media-body">
+                    <h2 class="account-heading">{{ user.username }}</h2>
+                    <p class="text-secondary">{{ user.email }}</p>
+                </div>
+            </div>
+            <div class="form-header border-bottom mb-3">
+                <p class="form-header mt-0">Profile Info</p>
+            </div>
+            <div class="profile-form">
+                <form action="{% url 'users:profile' %}", method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            {{ u_form.username.errors }}
+                            {{ u_form.username.label_tag }}
+                            {{ u_form.username|addclass:'form-control' }}
+                        </div>
+                        <div class="form-group col-md-6">
+                            {{ u_form.email.label_tag }}
+                            {{ u_form.email|addclass:'form-control' }}
+                            {% if u_form.email.errors %}
+                                {% for error in u_form.email.errors %}
+                                    <p class="invalid-feedback d-block"><strong>{{ error }}</strong></p>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            {{ u_form.first_name.errors }}
+                            {{ u_form.first_name.label_tag }}
+                            {{ u_form.first_name|addclass:'form-control' }}
+                        </div>
+                        <div class="form-group col-md-6">
+                            {{ u_form.last_name.errors }}
+                            {{ u_form.last_name.label_tag }}
+                            {{ u_form.last_name|addclass:'form-control' }}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            {{ p_form.location.errors }}
+                            {{ p_form.location.label_tag }}
+                            {{ p_form.location|addclass:'form-control' }}
+                        </div>
+                        <div class="form-group col-md-6">
+                            {{ p_form.experience.errors }}
+                            {{ p_form.experience.label_tag }}
+                            {{ p_form.experience|addclass:'form-control' }}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            {{ p_form.fighter.errors }}
+                            {{ p_form.fighter.label_tag }}
+                            {{ p_form.fighter|addclass:'form-control' }}
+                        </div>
+                        <div class="form-group col-md-6">
+                            {{ p_form.checkin.errors }}
+                            {{ p_form.checkin.label_tag }}
+                            {{ p_form.checkin|addclass:'form-control' }}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <p class="form-label">Profile Image: </p>
+                            <div class="custom-file">
+                                {{ p_form.image|addclass:'custom-file-input' }}
+                                <label for="{{ p_form.image.id_for_label }}" class="custom-file-label">Currently: {{ p_form.instance.get_filename }}</label>
+                            </div>
+                            {% if p_form.image.errors %}
+                                {% for error in p_form.image.errors %}
+                                    <p class="invalid-feedback d-block"><strong>{{ error }}</strong></p>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <button class="btn btn-outline-primary" type="submit">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+    $(document).ready(function() {
+        $('#id_image').on('change', function () {
+            var file = this.files[0]
+            var filenames = this.value.split('\\')
+            var label = $("label[for='" + $(this).attr('id') + "']");
+            label.html(filenames[filenames.length - 1])
+        })
+    })
+</script>
+{% endblock %}
