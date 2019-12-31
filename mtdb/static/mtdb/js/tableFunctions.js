@@ -45,7 +45,13 @@ $(document).ready(function () {
             return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.toString().localeCompare(valB)
         }
     }
-    function getCellValue(row, index) { return $(row).children('td').eq(index).text() }
+    function getCellValue(row, index) {
+        var cellValue = $(row).children('td').eq(index).text().trim()
+        if (cellValue === "No Ratings") {
+            return "0"
+        }
+        return cellValue
+    }
 
     function reapplyStripes() {
         $("#indexTable tr:visible").each(function (index) {

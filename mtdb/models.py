@@ -35,7 +35,7 @@ class Review(models.Model):
     date_created = models.DateTimeField(default=now)
     start_date = models.DateField(blank=True, null=True)
     end_date = models.DateField(blank=True, null=True)
-    training_length = models.IntegerField()
+    training_length = models.IntegerField(default=0)
     rating_training = models.IntegerField(choices=rating_choices, default=None)
     rating_facility = models.IntegerField(choices=rating_choices, default=None)
     rating_location = models.IntegerField(choices=rating_choices, default=None)

@@ -14,8 +14,8 @@ from .forms import ReviewCreateForm, ReviewFormSet
 
 def index(request):
     gyms = Gym.objects.annotate(count = Count('review'), avg = Avg('review__rating_overall'), total_days = Sum('review__training_length'))
-    top_rated = gyms.order_by('-avg')[0].name
-    most_reviewed = gyms.order_by('-count')[0].name
+    top_rated = gyms.exclude(review=None).order_by('-avg')[0].name
+    most_reviewed = gyms.exclude(review=None).order_by('-count')[0].name
     total_review_count = gyms.aggregate(total_reviews = Sum('count'))
     latest_review = Review.objects.order_by('-date_created')[0]
     context = {
