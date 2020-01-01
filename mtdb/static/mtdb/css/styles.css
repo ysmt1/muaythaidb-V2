@@ -77,6 +77,8 @@ ul.errorlist.nonfield {
 
 h3.welcome {
     font-family: 'Roboto', serif;
+    font-weight: 700;
+    font-style: italic;
 }
 
 .table-striped tbody tr:nth-of-type(even) {
