@@ -71,6 +71,10 @@ ul.errorlist.nonfield {
     margin-bottom: 10px;
 }
 
+button.close {
+    padding-top: .6rem !important;
+}
+
 /**********************************************
 **************Main/Index page styles***********
 **********************************************/
