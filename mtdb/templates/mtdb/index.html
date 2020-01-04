@@ -12,9 +12,9 @@
     <div class="col-md-3">
         <img src="{% static 'mtdb/img/imagebg.jpg' %}" class="img-fluid img-logo">
         <div class="sidebar-div my-2">
-            <h5 class="sidebar-header">Filter</h5>
+            <h5 class="sidebar-header">Search</h5>
             <div class="form-group">
-                <input type="text" id="filterRow" class="form-control my-2" placeholder="Search Gyms">
+                <input type="text" id="filterRow" class="form-control my-2" placeholder="Gym, Location" autocomplete="off">
             </div>
             <div class="custom-control custom-switch my-3">
                 <input type="checkbox" class="custom-control-input" id="hideRows">
@@ -23,7 +23,6 @@
         </div>
         <div class="sidebar-div my-2">
             <h5 class="sidebar-header">Statistics</h5>
-            <!-- <p class='text-muted text-center'> -->
                 <ul class="list-group">
                     <li class="list-group-item list-group-item-light"><u>Top Rated Gym</u><br>{{ top_rated }}</li>
                     <li class="list-group-item list-group-item-light"><u>Most Reviewed Gym</u><br>{{ most_reviewed }}</li>

@@ -1,11 +1,17 @@
 $(document).ready(function () {
 
-    $('#hideRows').change(function () {
-        var isChecked = !this.checked;
-
+    var toggleHide = function() {
         $("#indexTable tr td:contains('No Ratings')").each(function (index, element) {
             $(this).parent("tr").toggleClass("hide");
         });
+    }
+    if ($('#hideRows').prop('checked')) {
+        toggleHide()
+        reapplyStripes();
+    }
+    $('#hideRows').change(function () {
+        var isChecked = !this.checked;
+        toggleHide();
         reapplyStripes();
     });
 
@@ -23,7 +29,7 @@ $(document).ready(function () {
         });
         reapplyStripes();
     });
-
+    
     var icon;
     $('th').click(function () {
         icon = $(this).find('span.sort-icon')
@@ -49,7 +55,6 @@ $(document).ready(function () {
             return result;
         }
     }
-    // function getCellValue(row, index) { return $(row).children('td').eq(index).text() }
     function getCellValue(row, index) {
         var cellValue = $(row).children('td').eq(index).text().trim()
         if (cellValue === "No Ratings") {
@@ -57,7 +62,6 @@ $(document).ready(function () {
         }
         return cellValue
     }
-
     function reapplyStripes() {
         $("#indexTable tr:visible").each(function (index) {
             $(this).css("background-color", !!(index & 1) ? "rgba(0,0,0,0)" : "rgba(0,0,0,0.05)");
