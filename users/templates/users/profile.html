@@ -11,82 +11,154 @@
                     <p class="text-secondary">{{ user.email }}</p>
                 </div>
             </div>
-            <div class="form-header border-bottom mb-3">
-                <p class="form-header mt-0">Profile Info</p>
-            </div>
-            <div class="profile-form">
-                <form action="{% url 'users:profile' %}", method="POST" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            {{ u_form.username.errors }}
-                            {{ u_form.username.label_tag }}
-                            {{ u_form.username|addclass:'form-control' }}
-                        </div>
-                        <div class="form-group col-md-6">
-                            {{ u_form.email.label_tag }}
-                            {{ u_form.email|addclass:'form-control' }}
-                            {% if u_form.email.errors %}
-                                {% for error in u_form.email.errors %}
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-info-tab" data-toggle="tab" href="#nav-info" role="tab"
+                        aria-controls="nav-info" aria-selected="true">Profile Info</a>
+                    <a class="nav-item nav-link" id="nav-reviews-tab" data-toggle="tab" href="#nav-reviews" role="tab"
+                        aria-controls="nav-reviews" aria-selected="false">Reviews</a>
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-info" role="tabpanel" aria-labelledby="nav-info-tab">
+                    <div class="profile-form my-3">
+                        <form action="{% url 'users:profile' %}" , method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    {{ u_form.username.errors }}
+                                    {{ u_form.username.label_tag }}
+                                    {{ u_form.username|addclass:'form-control' }}
+                                </div>
+                                <div class="form-group col-md-6">
+                                    {{ u_form.email.label_tag }}
+                                    {{ u_form.email|addclass:'form-control' }}
+                                    {% if u_form.email.errors %}
+                                    {% for error in u_form.email.errors %}
                                     <p class="invalid-feedback d-block"><strong>{{ error }}</strong></p>
-                                {% endfor %}
-                            {% endif %}
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            {{ u_form.first_name.errors }}
-                            {{ u_form.first_name.label_tag }}
-                            {{ u_form.first_name|addclass:'form-control' }}
-                        </div>
-                        <div class="form-group col-md-6">
-                            {{ u_form.last_name.errors }}
-                            {{ u_form.last_name.label_tag }}
-                            {{ u_form.last_name|addclass:'form-control' }}
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            {{ p_form.location.errors }}
-                            {{ p_form.location.label_tag }}
-                            {{ p_form.location|addclass:'form-control' }}
-                        </div>
-                        <div class="form-group col-md-6">
-                            {{ p_form.experience.errors }}
-                            {{ p_form.experience.label_tag }}
-                            {{ p_form.experience|addclass:'form-control' }}
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            {{ p_form.fighter.errors }}
-                            {{ p_form.fighter.label_tag }}
-                            {{ p_form.fighter|addclass:'form-control' }}
-                        </div>
-                        <div class="form-group col-md-6">
-                            {{ p_form.checkin.errors }}
-                            {{ p_form.checkin.label_tag }}
-                            {{ p_form.checkin|addclass:'form-control' }}
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col">
-                            <p class="form-label">Profile Image: </p>
-                            <div class="custom-file">
-                                {{ p_form.image|addclass:'custom-file-input' }}
-                                <label for="{{ p_form.image.id_for_label }}" class="custom-file-label">Currently: {{ p_form.instance.get_filename }}</label>
+                                    {% endfor %}
+                                    {% endif %}
+                                </div>
                             </div>
-                            {% if p_form.image.errors %}
-                                {% for error in p_form.image.errors %}
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    {{ u_form.first_name.errors }}
+                                    {{ u_form.first_name.label_tag }}
+                                    {{ u_form.first_name|addclass:'form-control' }}
+                                </div>
+                                <div class="form-group col-md-6">
+                                    {{ u_form.last_name.errors }}
+                                    {{ u_form.last_name.label_tag }}
+                                    {{ u_form.last_name|addclass:'form-control' }}
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    {{ p_form.location.errors }}
+                                    {{ p_form.location.label_tag }}
+                                    {{ p_form.location|addclass:'form-control' }}
+                                </div>
+                                <div class="form-group col-md-6">
+                                    {{ p_form.experience.errors }}
+                                    {{ p_form.experience.label_tag }}
+                                    {{ p_form.experience|addclass:'form-control' }}
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    {{ p_form.fighter.errors }}
+                                    {{ p_form.fighter.label_tag }}
+                                    {{ p_form.fighter|addclass:'form-control' }}
+                                </div>
+                                <div class="form-group col-md-6">
+                                    {{ p_form.checkin.errors }}
+                                    {{ p_form.checkin.label_tag }}
+                                    {{ p_form.checkin|addclass:'form-control' }}
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col">
+                                    <p class="form-label">Profile Image: </p>
+                                    <div class="custom-file">
+                                        {{ p_form.image|addclass:'custom-file-input' }}
+                                        <label for="{{ p_form.image.id_for_label }}" class="custom-file-label">Currently:
+                                            {{ p_form.instance.get_filename }}</label>
+                                    </div>
+                                    {% if p_form.image.errors %}
+                                    {% for error in p_form.image.errors %}
                                     <p class="invalid-feedback d-block"><strong>{{ error }}</strong></p>
+                                    {% endfor %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <button class="btn btn-outline-primary" type="submit">Update</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="nav-reviews" role="tabpanel" aria-labelledby="nav-reviews-tab">
+                    {% if reviews %}
+                    <div class="profile-reviews my-2">
+                        <table class="table table-sm table-bordered" id="profileTable">
+                            <colgroup>
+                                <col style="width:40%">
+                                <col style="width:40%">
+                                <col style="width:10%">
+                                <col style="width:10%">
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th>Gym</th>
+                                    <th>Date</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for review in reviews %}
+                                <tr>
+                                    <td><a href="{{ review.gym.get_absolute_url }}">{{ review.gym }}</a></td>
+                                    <td>{{ review.date_created }}</td>
+                                    <td><a href="{% url 'update_review' review.id %}" class="update-review"><i
+                                                class="far fa-edit edit"></i></a></td>
+                                    <td>
+                                        <a href="#" class="delete-review" data-toggle="modal" data-target="#modal-{{ review.id }}">
+                                            <i class="far fa-trash-alt delete"></i></a>
+                                    </td>
+                                </tr>
+                                <!-- Modal -->
+                                <div class="modal fade" id="modal-{{ review.id }}" tabindex="-1" role="dialog"
+                                    aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="deleteModalLabel">Delete confirmation</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Are you sure you want to delete your review?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <form action="{% url 'delete_review' review.id %}" method="post">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="profile-delete" value="redirect">
+                                                    <button type="submit" class="btn btn-primary">Delete</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Modal -->
                                 {% endfor %}
-                            {% endif %}
-                        </div>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="text-right">
-                        <button class="btn btn-outline-primary" type="submit">Update</button>
-                    </div>
-                </form>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>
@@ -94,7 +166,7 @@
 {% endblock %}
 {% block scripts %}
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('#id_image').on('change', function () {
             var file = this.files[0]
             var filenames = this.value.split('\\')

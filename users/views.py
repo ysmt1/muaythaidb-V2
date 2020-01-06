@@ -6,8 +6,9 @@ from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.views import LoginView
 from django.contrib.messages.views import SuccessMessageMixin
+from mtdb.models import Review
 from .forms import UserUpdateForm, ProfileUpdateForm
 
 class LoginUser(SuccessMessageMixin, LoginView):
@@ -42,9 +43,11 @@ def profile_view(request):
         u_form = UserUpdateForm(instance = request.user)
         p_form = ProfileUpdateForm(instance = request.user.profile)
 
+    reviews = Review.objects.filter(author=request.user).order_by('-date_created')
     context = {
         'u_form': u_form,
-        'p_form': p_form
+        'p_form': p_form,
+        'reviews': reviews
     }
     return render(request, 'users/profile.html', context)
 

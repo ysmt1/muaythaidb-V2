@@ -145,6 +145,10 @@ p.form-header {
   margin-bottom: 10px;
 }
 
+.form-row > .form-group {
+    padding-left: 7px
+}
+
 /**********************************************
 ************Review form page styles************
 **********************************************/

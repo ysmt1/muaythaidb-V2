@@ -6,9 +6,9 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.db.models import Count, Avg, Sum, F
 from django.urls import reverse, reverse_lazy
 from django.views.decorators.http import require_http_methods
+from django.db.models import Count, Avg, Sum, F
 from .models import Gym, Review, GymImage, ReviewImage, Like
 from .forms import ReviewCreateForm, ReviewFormSet
 
@@ -76,7 +76,6 @@ class ReviewUpdateView(SuccessMessageMixin, LoginRequiredMixin, UserPassesTestMi
     form_class = ReviewCreateForm
     template_name_suffix = '_create_form'
     success_message = 'Review Updated!'
-    success_url = reverse_lazy('index')
 
     def get_context_data(self, **kwargs):
         context = super(ReviewUpdateView, self).get_context_data(**kwargs)
@@ -109,16 +108,24 @@ class ReviewUpdateView(SuccessMessageMixin, LoginRequiredMixin, UserPassesTestMi
             return True
         return False
 
+    def get_success_url(self):
+        return self.object.gym.get_absolute_url()
+
 class ReviewDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Review
     success_message = 'Deleted Review!'
-    success_url = reverse_lazy('index')
 
     def test_func(self):
         if self.request.user.id == self.get_object().author.id:
             return True
         else:
             return False
+
+    def get_success_url(self):
+        if self.request.POST.get('profile-delete'):
+            return reverse('users:profile')
+        else:
+            return reverse('index')
 
     def delete(self, request, *args, **kwargs):
             messages.success(self.request, self.success_message)

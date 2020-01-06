@@ -42,7 +42,19 @@ class ReviewCreateForm(forms.ModelForm):
 
         return cleaned_data
 
-ReviewFormSet = forms.inlineformset_factory(Review, ReviewImage, 
-                                        fields=('image',),
-                                        widgets={'image': MyImageWidget(attrs={'class':'custom-file-input review-input'})},
-                                        extra=1, can_delete=True)
+class ReviewImageForm(forms.ModelForm):
+    class Meta:
+        model = ReviewImage
+        fields = ('image',)
+        widgets = {'image': MyImageWidget(attrs={'class':'custom-file-input review-input'})}
+
+    def clean_image(self):
+        image = self.cleaned_data.get('image', False)
+        if image:
+            if image.size > (5*1024*1024):
+                raise forms.ValidationError("Error! Image Exceeds Filesize Limit ( > 5mb )")
+            return image
+        else:
+            raise forms.ValidationError("Couldn't read uploaded image")
+
+ReviewFormSet = forms.inlineformset_factory(Review, ReviewImage, form=ReviewImageForm, extra=1, can_delete=True)
