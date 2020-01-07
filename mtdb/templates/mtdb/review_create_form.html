@@ -60,7 +60,12 @@
                         {{ form.id }}
                         {{ form.review }}
                         <div class="preview" id="{{ form.image.id_for_label }}">
-                            {% if form.instance.image %}
+                            {% if form.instance.image and form.image.errors %}
+                                <img src="{{ form.instance.image.url }}" class="img-fluid img-thumbnail">
+                                {% for error in form.image.errors %}
+                                <p class="invalid-feedback d-block">{{ error }}</p>
+                                {% endfor %}
+                            {% elif form.instance.image %}
                                 <img src="{{ form.instance.image.url }}" class="img-fluid img-thumbnail">
                             {% elif form.image.errors %}
                                 {% for error in form.image.errors %}
