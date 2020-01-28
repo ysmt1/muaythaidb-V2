@@ -18,7 +18,10 @@
                     {{ form.username|addclass:'form-control' }}
                 </div>
                 <div class="form-group">
-                    <label for="{{ form.password.id_for_label }}">Password* </label>
+                    <label for="{{ form.password.id_for_label }}">
+                        Password* 
+                    </label>
+                    <a href="{% url 'users:password_reset' %}"><small class="float-right">Forgot Password?</small></a>
                     {{ form.password|addclass:'form-control' }}
                 </div>
                 <div class="form-group">

@@ -1,19 +1,33 @@
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.auth import logout
+from django.contrib.auth import logout, views as auth_views
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.views import LoginView
 from django.contrib.messages.views import SuccessMessageMixin
 from mtdb.models import Review
 from .forms import UserUpdateForm, ProfileUpdateForm
 
-class LoginUser(SuccessMessageMixin, LoginView):
+class LoginUser(SuccessMessageMixin, auth_views.LoginView):
     template_name = 'users/login.html'
     success_message = 'You are now logged in!'
+
+class PasswordReset(auth_views.PasswordResetView):
+    template_name = 'users/password_reset.html'
+    email_template_name = 'users/password_reset_email.html'
+    success_url = reverse_lazy('users:password_reset_done')
+
+class PasswordResetDone(auth_views.PasswordResetDoneView):
+    template_name = 'users/password_reset_done.html'
+
+class PasswordResetConfirm(auth_views.PasswordResetConfirmView):
+    template_name = 'users/password_reset_confirm.html'
+    success_url = reverse_lazy('users:password_reset_complete')
+
+class PasswordResetComplete(auth_views.PasswordResetCompleteView):
+    template_name = 'users/password_reset_complete.html'
 
 def register_view(request):
     if request.method == 'POST':
