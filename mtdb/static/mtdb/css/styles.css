@@ -1,11 +1,16 @@
 /**********************************************
 ********General styles / utilities*************
 **********************************************/
+html {
+  position: relative;
+  min-height: 100%;
+}
 
 body {
   background: #fafafa;
   color: #333333;
   /* margin-top: 5rem; */
+  margin-bottom: 60px;
 }
 
 .text-center {
@@ -14,6 +19,10 @@ body {
 
 .text-right {
     text-align: right;
+}
+
+.light-underline {
+    border-bottom: 1px solid #dee2e6;
 }
 
 .hide {
@@ -34,16 +43,44 @@ ul.errorlist.nonfield {
     margin: 0
 }
 
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  line-height: 60px; /* Vertically center the text there */
+  background-color: #d6d6d6;
+}
+
+.footer-link {
+    padding-left: .5rem;
+    padding-right: .5rem;
+}
+
 .list-group-item {
     text-align: center;
+}
+
+.bold-label {
+    font-weight: 600; 
+}
+
+.col-form-label {
+    font-weight: 600;
+}
+
+.asteriskField {
+    display: none;
 }
 /**********************************************
 ********Navbar and Content div styles**********
 **********************************************/
 
 .bg-nav {
-    background-color: #0a6986bd;
+    /* background-color: #0a6986bd; */
     /* background-color: #41879c; */
+    background-color: #3e92ac;
 }
 
 .navbar-text {
@@ -134,6 +171,10 @@ p.form-header {
     margin-top: 7px
 }
 
+.pass-reset {
+    padding-top: 10px;
+}
+
 /**********************************************
 ************Profile page styles****************
 **********************************************/
@@ -147,6 +188,18 @@ p.form-header {
 
 .form-row > .form-group {
     padding-left: 7px
+}
+
+/**********************************************
+************Contact page styles****************
+**********************************************/
+.contact-name, .contact-email {
+    max-width: 500px;
+    background-color: #fafbfc;
+}
+
+.contact-message {
+    background-color: #fafbfc;
 }
 
 /**********************************************
@@ -189,6 +242,15 @@ div.rating-label {
 
 img.img-thumbnail {
     width: 175px
+}
+
+div.rating-label > label {
+    font-weight: 600;
+}
+
+span.optional {
+    font-weight: 300;
+    font-style: italic;
 }
 
 /**********************************************

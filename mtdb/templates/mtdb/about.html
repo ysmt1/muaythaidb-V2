@@ -1,0 +1,21 @@
+{% extends 'mtdb/base.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+    <div class="col">
+        <div class="content-div">
+            <h3><span class="light-underline">About</span></h3>
+            <p class="mt-3">
+                This website was developed to create a centralized place where users can review Muay Thai Gyms in Thailand.
+            </p>
+            <p>
+                With so many gyms to choose from, picking one can be a difficult task.
+            </p>
+            <p>
+                Hopefully this resource can help you choose where you would like to train.
+            </p>
+            <img src="{% static 'mtdb/img/thailand.png' %}" class="img-fluid">
+        </div>
+    </div>
+</div>
+{% endblock %}

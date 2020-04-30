@@ -1,6 +1,28 @@
 from django import forms
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit, Layout, Fieldset, ButtonHolder, Field, HTML
 from users.forms import MyImageWidget
 from .models import Review, Gym, ReviewImage
+
+class ContactForm(forms.Form):
+    name = forms.CharField(max_length=200, required=False)
+    email = forms.EmailField()
+    message = forms.CharField(widget=forms.Textarea)
+
+    def __init__(self, *args, **kwargs):
+        super(ContactForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_id = 'contactForm'
+        self.helper.form_class = 'contact-form'
+        self.helper.form_method = 'POST'
+
+        self.helper.add_input(Submit('submit', 'Submit'))
+
+        self.helper.layout = Layout(
+            Field('name', css_class="contact-name"),
+            Field('email', css_class="contact-email"),
+            Field('message', css_class="contact-message")
+        )
 
 class ReviewCreateForm(forms.ModelForm):
     gym = forms.ModelChoiceField(Gym.objects.all(), empty_label="Select Gym")
@@ -27,6 +49,7 @@ class ReviewCreateForm(forms.ModelForm):
             'rating_location': 'Rate the Location/Surrounding Area (Nearby Attractions/Housing/Transport/Food, etc.)',
             'rating_cost': 'Rate the Cost/Value',
             'rating_overall': 'Overall Rating',
+            'content': 'Content'
         }
 
     def clean(self):

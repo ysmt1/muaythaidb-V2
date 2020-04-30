@@ -3,6 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.messages.views import SuccessMessageMixin
+from django.core.mail import send_mail
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -10,7 +11,7 @@ from django.urls import reverse, reverse_lazy
 from django.views.decorators.http import require_http_methods
 from django.db.models import Count, Avg, Sum, F
 from .models import Gym, Review, GymImage, ReviewImage, Like
-from .forms import ReviewCreateForm, ReviewFormSet
+from .forms import ReviewCreateForm, ReviewFormSet, ContactForm
 
 def index(request):
     gyms = Gym.objects.annotate(count = Count('review'), avg = Avg('review__rating_overall'), total_days = Sum('review__training_length'))
@@ -26,6 +27,27 @@ def index(request):
         'latest_review': latest_review
     }
     return render(request, 'mtdb/index.html', context)
+
+def about(request):
+    return render(request, 'mtdb/about.html')
+
+def contact(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            message = form.cleaned_data['message']
+            subject = f"MTDB, message from {email} ({name})"
+
+            send_mail(subject, message, "", ['yosuke.seki@gmail.com'])
+            messages.success(request, 'Message Sent! Will Reply Shortly')
+            return HttpResponseRedirect(reverse('index'))
+    else:
+        form = ContactForm()
+
+    return render(request, 'mtdb/contact.html', {'form':form})
 
 class GymDetailView(DetailView):
     model = Gym
@@ -49,10 +71,10 @@ class ReviewCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super(ReviewCreateView, self).get_context_data(**kwargs)
         if self.request.POST:
-            context['form'] = ReviewCreateForm(self.request.POST)
+            context['form'] = ReviewCreateForm(self.request.POST, label_suffix="")
             context['formset'] = ReviewFormSet(self.request.POST, self.request.FILES)
         else:
-            context['form'] = ReviewCreateForm()
+            context['form'] = ReviewCreateForm(label_suffix="")
             context['formset'] = ReviewFormSet()
         return context       
 
