@@ -66,9 +66,9 @@ ul.errorlist.nonfield {
     font-weight: 600; 
 }
 
-.col-form-label {
+/* .col-form-label {
     font-weight: 600;
-}
+} */
 
 .asteriskField {
     display: none;
@@ -172,7 +172,11 @@ p.form-header {
 }
 
 .pass-reset {
-    padding-top: 10px;
+    padding-top: 5px;
+}
+
+form.register-form label {
+    font-weight: 600;
 }
 
 /**********************************************

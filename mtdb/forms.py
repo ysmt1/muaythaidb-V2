@@ -15,6 +15,7 @@ class ContactForm(forms.Form):
         self.helper.form_id = 'contactForm'
         self.helper.form_class = 'contact-form'
         self.helper.form_method = 'POST'
+        self.helper.label_class = 'bold-label'
 
         self.helper.add_input(Submit('submit', 'Submit'))
 

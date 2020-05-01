@@ -10,7 +10,7 @@
                 <img src="{% static 'mtdb/img/register.png' %}" class="img-fluid auth-img">
                 <div style="clear: both;"></div>
             </div>
-            <form action="{% url 'users:register' %}" , method="POST">
+            <form action="{% url 'users:register' %}" , method="POST" class="register-form">
                 {% csrf_token %}
                 {{ form|crispy }}
                 <div class="form-group">
