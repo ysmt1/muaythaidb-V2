@@ -1,4 +1,5 @@
 from django import forms
+from django.utils.safestring import mark_safe
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Fieldset, ButtonHolder, Field, HTML
 from users.forms import MyImageWidget
@@ -45,11 +46,11 @@ class ReviewCreateForm(forms.ModelForm):
         labels = {
             'start_date': 'Training Start Date',
             'end_date': 'Training End Date',
-            'rating_training': 'Rate the Training (Instruction, Trainers, Padwork, Sparring, Clinching, etc.)',
-            'rating_facility': 'Rate the Facilities (Equipment, Hygiene, Onsite Accommodations, etc.)',
-            'rating_location': 'Rate the Location/Surrounding Area (Nearby Attractions/Housing/Transport/Food, etc.)',
-            'rating_cost': 'Rate the Cost/Value',
-            'rating_overall': 'Overall Rating',
+            'rating_training': mark_safe('Rate the Training (Instruction, Trainers, Padwork, Sparring, Clinching, etc.) &#129354;'),
+            'rating_facility': mark_safe('Rate the Facilities (Equipment, Hygiene, Onsite Accommodations, etc.) &#127969;'),
+            'rating_location': mark_safe('Rate the Location (Nearby Attractions/Housing/Transport/Food, etc.) &#127759;'),
+            'rating_cost': mark_safe('Rate the Cost/Value &#128178;'),
+            'rating_overall': mark_safe('How would you rate the gym overall? (1 = Bad &#128542;, 3 = Ok &#128528;, 5 = Great! &#128513;)'),
             'content': 'Content'
         }
 

@@ -30,6 +30,18 @@
                     {% endfor %}
                 </div>
             </div>
+        {% else %}
+            <div class="content-div my-2">
+                <h4>Gym Photos</h4>
+                <img src="{% static 'mtdb/img/food/grapow.jpg' %}" class="img-thumbnail">
+                <img src="{% static 'mtdb/img/food/class.jpg' %}" class="img-thumbnail">
+                <img src="{% static 'mtdb/img/food/katsu.jpg' %}" class="img-thumbnail">
+                <img src="{% static 'mtdb/img/food/khaomangai.jpg' %}" class="img-thumbnail">
+                <img src="{% static 'mtdb/img/food/kare.jpg' %}" class="img-thumbnail">
+                <img src="{% static 'mtdb/img/food/lunch.jpg' %}" class="img-thumbnail">
+                <img src="{% static 'mtdb/img/food/somtam.jpg' %}" class="img-thumbnail">
+                <img src="{% static 'mtdb/img/food/viet.jpg' %}" class="img-thumbnail">
+            </div>
         {% endif %}
         <div class="content-div my-2">
             <h4>Gym Reviews</h4>
@@ -63,7 +75,7 @@
                         <span class="rating-name">Location:</span><span class="rating-star">{{ review.rating_location}}</span>
                         <span class="rating-name">Cost:</span><span class="rating-star">{{ review.rating_cost}}</span>
                     </div>
-                    <p class="content">{{ review.content }}</p>
+                    <p class="content mt-2">{{ review.content }}</p>
                     {% if review.images.all %}
                         <div class="review-images">
                             {% for image in review.images.all %}

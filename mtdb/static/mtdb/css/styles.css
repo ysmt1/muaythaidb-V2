@@ -211,12 +211,7 @@ form.register-form label {
 **********************************************/
 
 .radio-wrap {
-    margin: 5px;
-    text-align: left;
-}
-
-div.rating-label {
-    margin-bottom: 5px;
+    text-align: right;
 }
 
 .btn-add {
@@ -233,11 +228,11 @@ div.rating-label {
 }
 
 .review-input {
-    width: 93%
+    width: 95%
 }
 
 .review-input-label {
-    width: 93%;
+    width: 95%;
 }
 
 .preview {
@@ -369,14 +364,11 @@ p.user-date {
     span.rating-name{
         width: 13%
     }
-    .review-input {
-        width: 90%
-    }
-    .review-input-label {
-        width: 90%;
-    }
     th:hover span.sort-icon {
         display: none;
+    }
+    .radio-wrap {
+        text-align: left;
     }
 }
 
@@ -394,6 +386,15 @@ p.user-date {
     .gym-images {
         text-align: center;
     }
+    .review-input {
+        width: 93%
+    }
+    .review-input-label {
+        width: 93%;
+    }
+    li.list-group-item p {
+        font-size: 14px;
+    }
 }
 
 @media only screen and (max-width: 767px){
@@ -404,10 +405,13 @@ p.user-date {
         margin-right: auto;
     }
     .review-input {
-        width: 88%
+        width: 90%
     }
     .review-input-label {
-        width: 88%;
+        width: 90%;
+    }
+    li.list-group-item p {
+        font-size: 16px;
     }
 }
 

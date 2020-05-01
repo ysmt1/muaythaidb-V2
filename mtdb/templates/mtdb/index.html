@@ -27,16 +27,22 @@
         <div class="sidebar-div my-2">
             <h5 class="sidebar-header">Statistics</h5>
                 <ul class="list-group">
-                    <li class="list-group-item list-group-item-light"><u>Top Rated Gym</u><br>{{ top_rated }}</li>
-                    <li class="list-group-item list-group-item-light"><u>Most Reviewed Gym</u><br>{{ most_reviewed }}</li>
                     <li class="list-group-item list-group-item-light">
-                        <u>Latest Review</u>
-                        <br>
-                        {{ latest_review.author.username }} - {{ latest_review.gym.name }}
-                        <br>
-                        {{ latest_review.date_created|date:"SHORT_DATE_FORMAT" }}
+                        <p class="my-0"><u>Top Rated Gym</u></p>
+                        <p class="my-1">{{ top_rated }}</p>
                     </li>
-                    <li class="list-group-item list-group-item-light">Total Review Count: {{ total_review_count }}</li>
+                    <li class="list-group-item list-group-item-light">
+                        <p class="my-0"><u>Most Reviewed Gym</u></p>
+                        <p class="my-1">{{ most_reviewed }}</p>
+                    </li>
+                    <li class="list-group-item list-group-item-light">
+                        <p class="my-0"><u>Latest Review</u></p>
+                        <p class="my-1">{{ latest_review.author.username }} - {{ latest_review.gym.name }}</p>
+                        <p class="my-1">{{ latest_review.date_created|date:"SHORT_DATE_FORMAT" }}</p>
+                    </li>
+                    <li class="list-group-item list-group-item-light">
+                        <p class="my-0">Total Review Count: {{ total_review_count }}</p>
+                    </li>
                 </ul>
             </p>
         </div>
