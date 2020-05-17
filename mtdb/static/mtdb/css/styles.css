@@ -66,10 +66,6 @@ ul.errorlist.nonfield {
     font-weight: 600; 
 }
 
-/* .col-form-label {
-    font-weight: 600;
-} */
-
 .asteriskField {
     display: none;
 }
@@ -93,6 +89,21 @@ ul.errorlist.nonfield {
     padding: 10px 20px;
     border-radius: 3px;
     margin-bottom: 10px;
+}
+
+.map-div  {
+    position: relative;
+    padding-bottom: 65.25%;
+    padding-top: 30px;
+    height: 0;
+    overflow: hidden;
+}
+.map-div iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
 .sidebar-header {
@@ -150,6 +161,13 @@ th:hover span.sort-icon {
     right: 5px;
 }
 
+.buttonHolder {
+    overflow: hidden;
+}
+
+#add-gym-msg {
+    vertical-align: sub;
+}
 /**********************************************
 ***********Register/Login page styles**********
 **********************************************/
@@ -392,8 +410,17 @@ p.user-date {
     .review-input-label {
         width: 93%;
     }
-    li.list-group-item p {
-        font-size: 14px;
+    .gym-title {
+        height: 94%;
+    }
+    .equal-height-93 {
+        height: 93%;
+    }
+    .list-div {
+        flex-direction: row;
+    }
+    .list-group-item:last-child {
+        margin-bottom: -1px;
     }
 }
 
@@ -413,6 +440,21 @@ p.user-date {
     li.list-group-item p {
         font-size: 16px;
     }
+    .gym-title {
+        height: auto;
+    }
+    .equal-height-93 {
+        height: auto;
+    }
+    .list-div {
+        flex-direction: column;
+    }
+}
+
+@media only screen and (max-width: 575px){
+    nav.navbar {
+        position: static
+    }
 }
 
 @media only screen and (max-width: 465px){
@@ -420,7 +462,7 @@ p.user-date {
         font-size: 12px
     }
     tbody.table-body > tr > td {
-    font-size: 12px
+        font-size: 12px
     }
     .hide-small {
         display: none;
@@ -428,9 +470,6 @@ p.user-date {
     div.thumbnail {
         width: 142px;
         height: 79px;
-    }
-    nav.navbar {
-        position: static
     }
     .review-input {
         width: 84%

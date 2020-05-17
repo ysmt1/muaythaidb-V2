@@ -11,7 +11,7 @@ from django.urls import reverse, reverse_lazy
 from django.views.decorators.http import require_http_methods
 from django.db.models import Count, Avg, Sum, F
 from .models import Gym, Review, GymImage, ReviewImage, Like
-from .forms import ReviewCreateForm, ReviewFormSet, ContactForm
+from .forms import ReviewCreateForm, ReviewFormSet, ContactForm, AddGymForm
 
 def index(request):
     gyms = Gym.objects.annotate(count = Count('review'), avg = Avg('review__rating_overall'), total_days = Sum('review__training_length'))
@@ -19,12 +19,14 @@ def index(request):
     most_reviewed = gyms.exclude(review=None).order_by('-count')[0].name
     total_review_count = gyms.aggregate(total_reviews = Sum('count'))
     latest_review = Review.objects.order_by('-date_created')[0]
+    gym_form = AddGymForm()
     context = {
         'gyms': gyms,
         'top_rated': top_rated,
         'most_reviewed': most_reviewed,
         'total_review_count': total_review_count['total_reviews'],
-        'latest_review': latest_review
+        'latest_review': latest_review,
+        'form': gym_form
     }
     return render(request, 'mtdb/index.html', context)
 
@@ -180,4 +182,24 @@ def like_view(request, review_id, route):
     else:
         return JsonResponse({'error': error})
 
+@require_http_methods(["POST"])
+def add_gym(request):
+    user = request.user
+    if not user.is_authenticated:
+        return JsonResponse({'error': 'Please Login'})
+
+    if request.is_ajax() and request.method == 'POST':
+        form = AddGymForm(request.POST)
+
+        if form.is_valid():
+            gym_name = form.cleaned_data['gym_name']
+            gym_location = form.cleaned_data['gym_location']
+            subject = f"MTDB, Add Gym {gym_name} in {gym_location}"
+
+            send_mail(subject, subject, "", ['yosuke.seki@gmail.com'])
+            return JsonResponse({'success': 'Request Sent!'})
+        else:
+            JsonResponse({'error': 'An Error as Occured!'})
+    else:
+        return JsonResponse({'error': 'An Error as Occured!'})
     

@@ -16,6 +16,9 @@ class Location(models.Model):
 class Gym(models.Model):
     name = models.CharField(max_length=200)
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    website = models.URLField(max_length=200, default='', blank=True)
+    facebook = models.URLField(max_length=200, default='', blank=True)
+    instagram = models.URLField(max_length=200, default='', blank=True)
 
     class Meta:
         ordering = ['name']

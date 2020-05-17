@@ -1,7 +1,9 @@
 from django import forms
+from django.urls import reverse
 from django.utils.safestring import mark_safe
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Fieldset, ButtonHolder, Field, HTML
+from crispy_forms.bootstrap import StrictButton
 from users.forms import MyImageWidget
 from .models import Review, Gym, ReviewImage
 
@@ -24,6 +26,27 @@ class ContactForm(forms.Form):
             Field('name', css_class="contact-name"),
             Field('email', css_class="contact-email"),
             Field('message', css_class="contact-message")
+        )
+
+class AddGymForm(forms.Form):
+    gym_name = forms.CharField(max_length=200)
+    gym_location = forms.CharField(max_length=200)
+
+    def __init__(self, *args, **kwargs):
+        super(AddGymForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_id = 'addGym'
+        self.helper.form_class = 'add-gym'
+        self.helper.form_method = 'POST'
+        self.helper.form_action = reverse('add_gym')
+        self.helper.form_show_labels = False
+        self.helper.layout = Layout(
+            Field('gym_name', placeholder="Gym Name"),
+            Field('gym_location', placeholder="Location"),
+            ButtonHolder(
+                HTML('<span id="add-gym-msg"></span>'),
+                StrictButton("Submit", type='submit', css_class="btn-outline-primary btn-sm float-right")
+            )
         )
 
 class ReviewCreateForm(forms.ModelForm):
