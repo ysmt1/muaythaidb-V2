@@ -41,8 +41,8 @@ class AddGymForm(forms.Form):
         self.helper.form_action = reverse('add_gym')
         self.helper.form_show_labels = False
         self.helper.layout = Layout(
-            Field('gym_name', placeholder="Gym Name"),
-            Field('gym_location', placeholder="Location"),
+            Field('gym_name', placeholder="Gym Name", autocomplete="off"),
+            Field('gym_location', placeholder="Location", autocomplete="off"),
             ButtonHolder(
                 HTML('<span id="add-gym-msg"></span>'),
                 StrictButton("Submit", type='submit', css_class="btn-outline-primary btn-sm float-right")

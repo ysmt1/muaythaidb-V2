@@ -1,3 +1,4 @@
+import os
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
@@ -43,7 +44,7 @@ def contact(request):
             message = form.cleaned_data['message']
             subject = f"MTDB, message from {email} ({name})"
 
-            send_mail(subject, message, "", ['yosuke.seki@gmail.com'])
+            send_mail(subject, message, "", [os.environ.get('EMAIL_TO')])
             messages.success(request, 'Message Sent! Will Reply Shortly')
             return HttpResponseRedirect(reverse('index'))
     else:
@@ -196,7 +197,7 @@ def add_gym(request):
             gym_location = form.cleaned_data['gym_location']
             subject = f"MTDB, Add Gym {gym_name} in {gym_location}"
 
-            send_mail(subject, subject, "", ['yosuke.seki@gmail.com'])
+            send_mail(subject, subject, "", [os.environ.get('EMAIL_TO')])
             return JsonResponse({'success': 'Request Sent!'})
         else:
             JsonResponse({'error': 'An Error as Occured!'})

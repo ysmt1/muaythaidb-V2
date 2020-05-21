@@ -10,16 +10,25 @@
   <div class="col-lg-3">
     <div class="row">
       <div class="col-md-6 col-lg-12">
-        <div class="sidebar-div gym-title my-2">
-          <h4 class="gym-header">{{ object.name }}</h4>
+        <div class="list-group my-2">
+          <a href="#" class="list-group-item list-group-item-action disabled enable"><h5 class="mb-1">{{ object.name }}</h5></a>
           {% if object.website %}
-          <p><a href="{{ object.website }}" target="_blank">Website</a></p>
+          <a href="{{ object.website }}" class="list-group-item list-group-item-action" target="_blank">
+            Website
+            <span><i class="fas fa-globe-americas"></i></span>
+          </a>
           {% endif %}
           {% if object.facebook %}
-          <p><a href="{{ object.facebook }}" target="_blank">Facebook</a></p>
+          <a href="{{ object.facebook }}" class="list-group-item list-group-item-action" target="_blank">
+            Facebook
+            <span><i class="fab fa-facebook"></i></span>
+          </a>
           {% endif %}
           {% if object.instagram %}
-          <p><a href="{{ object.instagram }}" target="_blank">Instagram</a></p>
+          <a href="{{ object.instagram }}" class="list-group-item list-group-item-action" target="_blank">
+            Instagram
+            <span><i class="fab fa-instagram"></i></span>
+          </a>
           {% endif %}
         </div>
       </div>

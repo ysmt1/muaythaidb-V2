@@ -5,8 +5,8 @@ $(document).ready(function () {
         'North': ['Chiang Mai', 'Lampang', 'Pai'],
         'NorthEast': ['Ubon Ratchathani', 'Buriram', 'Khlong Phai'],
         'Central': ['Bangkok', 'Nonthaburi', 'Pathum Thani'],
-        'East': ['Hua Hin'],
-        'West': ['Pattaya'],
+        'East': ['Pattaya'],
+        'West': ['Hua Hin'],
         'South': ['Phuket', 'Koh Phangan', 'Koh Samui', 'Krabi']
     }
 
@@ -55,17 +55,17 @@ $(document).ready(function () {
     $("#filterRow").keyup(function () {
         var value = $(this).val().toLowerCase().trim();
 
-        $("#indexTable tbody tr").not(".hiddenRow").each(function (index) {
+        $("#indexTable tbody tr").not(".filterHide").each(function (index) {
 
             var row = $(this);
             var gymName = row.find('td').eq(0).text().toLowerCase().trim();
             var city = row.find('td').eq(1).text().toLowerCase().trim();
 
             if (gymName.indexOf(value) == -1 && city.indexOf(value) == -1) {
-                row.hide();
+                row.hide().addClass('searchHide');
             }
             else {
-                row.show();
+                row.show().removeClass('searchHide');
             }
 
         });
@@ -92,11 +92,11 @@ $(document).ready(function () {
             .map(function (i) { return regions[i].join(); }).join().split(",");
 
         if (cities == "" && !hideNoReviews) { // if no filters selected, show all items
-            $("#indexTable tbody tr").show().removeClass('hiddenRow');
+            $("#indexTable tbody tr").not(".searchHide").show().removeClass('filterHide');
             reapplyStripes()
         } else { // otherwise, hide everything...
-            $("#indexTable tbody tr").hide().addClass('hiddenRow');
-            $("#indexTable tbody tr").each(function () {
+            $("#indexTable tbody tr").not(".searchHide").hide().addClass('filterHide');
+            $("#indexTable tbody tr").not(".searchHide").each(function () {
                 var show = false;
                 var row = $(this);
 
@@ -124,7 +124,7 @@ $(document).ready(function () {
                     }
                 })
                 if (show) {
-                    row.show().removeClass('hiddenRow');
+                    row.show().removeClass('filterHide');
                 }
             })
             reapplyStripes()
