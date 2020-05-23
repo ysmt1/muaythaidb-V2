@@ -12,6 +12,9 @@
       <div class="col-md-6 col-lg-12">
         <div class="list-group my-2">
           <a href="#" class="list-group-item list-group-item-action disabled enable"><h5 class="mb-1">{{ object.name }}</h5></a>
+          <a href="#" class="list-group-item list-group-item-action disabled enable">
+            <i>{{ object.location.city }}</i>
+          </a>
           {% if object.website %}
           <a href="{{ object.website }}" class="list-group-item list-group-item-action" target="_blank">
             Website
