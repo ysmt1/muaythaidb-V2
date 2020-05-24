@@ -31,6 +31,7 @@ class ContactForm(forms.Form):
 class AddGymForm(forms.Form):
     gym_name = forms.CharField(max_length=200)
     gym_location = forms.CharField(max_length=200)
+    gym_website = forms.CharField(max_length=200)
 
     def __init__(self, *args, **kwargs):
         super(AddGymForm, self).__init__(*args, **kwargs)
@@ -43,6 +44,7 @@ class AddGymForm(forms.Form):
         self.helper.layout = Layout(
             Field('gym_name', placeholder="Gym Name", autocomplete="off"),
             Field('gym_location', placeholder="Location", autocomplete="off"),
+            Field('gym_website', placeholder="Website/Facebook", autocomplete="off"),
             ButtonHolder(
                 HTML('<span id="add-gym-msg"></span>'),
                 StrictButton("Submit", type='submit', css_class="btn-outline-primary btn-sm float-right")

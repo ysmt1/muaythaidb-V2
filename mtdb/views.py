@@ -195,9 +195,11 @@ def add_gym(request):
         if form.is_valid():
             gym_name = form.cleaned_data['gym_name']
             gym_location = form.cleaned_data['gym_location']
+            gym_website = form.cleaned_data['gym_website']
             subject = f"MTDB, Add Gym {gym_name} in {gym_location}"
+            message = subject + f"\n{gym_website}"
 
-            send_mail(subject, subject, "", [os.environ.get('EMAIL_TO')])
+            send_mail(subject, message, "", [os.environ.get('EMAIL_TO')])
             return JsonResponse({'success': 'Request Sent!'})
         else:
             JsonResponse({'error': 'An Error as Occured!'})
