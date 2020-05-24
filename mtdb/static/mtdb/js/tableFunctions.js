@@ -7,7 +7,7 @@ $(document).ready(function () {
         'Central': ['Bangkok', 'Nonthaburi', 'Pathum Thani'],
         'East': ['Pattaya'],
         'West': ['Hua Hin'],
-        'South': ['Phuket', 'Koh Phangan', 'Koh Samui', 'Krabi']
+        'South': ['Phuket', 'Koh Phangan', 'Koh Samui', 'Krabi', 'Khao Lak', 'Ko Yao Noi']
     }
 
     // Reapply zebra striping
