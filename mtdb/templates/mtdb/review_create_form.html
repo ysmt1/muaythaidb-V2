@@ -9,22 +9,34 @@
             <form action="" , method="POST" enctype="multipart/form-data" id="my-form">
                 {% csrf_token %}
                 <div class="form-row">
-                    <div class="form-group col-lg-4">
+                    <div class="form-group col-lg-3">
                         {{ form.gym.errors }}
                         <label for="{{ form.gym.id_for_label }}" class="bold-label">Gym</label>
                         {{ form.gym|addclass:'form-control' }}
                     </div>
-                    <div class="form-group col-lg-4">
+                    <div class="form-group col-lg-3">
                         {{ form.start_date.errors }}
                         <label for="{{ form.start_date.id_for_label }}" class="bold-label">Training Start Date <span
                                 class="text-muted optional"> - Optional</span></label>
                         {{ form.start_date|addclass:'form-control' }}
                     </div>
-                    <div class="form-group col-lg-4">
+                    <div class="form-group col-lg-3">
                         {{ form.end_date.errors }}
                         <label for="{{ form.end_date.id_for_label }}" class="bold-label">Training End Date 
                             <span class="text-muted optional"> - Optional</span></label></label>
                         {{ form.end_date|addclass:'form-control' }}
+                    </div>
+                    <div class="form-group col-lg-3">
+                        {{ form.session_type.errors }}
+                        <label for="{{ form.session_type.id_for_label }}" class="bold-label">Session Type</label>
+                        <div class="session-wrap">
+                            {% for radio in form.session_type %}
+                            <div class="custom-control custom-radio custom-control-inline">
+                                {{ radio.tag }}
+                                <label for="{{ radio.id_for_label }}" class="custom-control-label">{{ radio.choice_label }}</label>
+                            </div>
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
                 {% for field in form %}

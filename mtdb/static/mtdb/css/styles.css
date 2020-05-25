@@ -232,6 +232,11 @@ form.register-form label {
     text-align: right;
 }
 
+.session-wrap {
+    text-align: center;
+    padding-top: 7px;
+}
+
 .btn-add {
     margin-top: .5rem;
     margin-bottom: .5rem

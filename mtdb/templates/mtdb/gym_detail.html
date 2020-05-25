@@ -81,6 +81,9 @@
             Trained from {{ review.start_date|date:"SHORT_DATE_FORMAT" }} - {{ review.end_date|date:"SHORT_DATE_FORMAT" }}
           </div>
           {% endif %}
+          <div class="review-badges my-1">
+            <span class="badge badge-pill badge-success">{{ review.get_session_type_display }} Session</span>
+          </div>
           <div class="overall-ratings my-1">
             <span class="rating-name-overall">Overall Rating: </span><span class="rating-star">{{ review.rating_overall}}</span>
           </div>

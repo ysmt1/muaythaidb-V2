@@ -30,14 +30,18 @@ class Gym(models.Model):
         return reverse('gym_detail', kwargs={'gym_name': self.name.replace(" ", "_")})
 
 class Review(models.Model):
+    GROUP = 'group'
+    PRIVATE = 'private'
+    session_choices = [(GROUP, 'Group'), (PRIVATE, 'Private')]
     rating_choices = [(1,'One'),(2,'Two'),(3,'Three'),(4,'Four'),(5,'Five')]
-
+    
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     gym = models.ForeignKey(Gym, on_delete=models.CASCADE)
     content = models.TextField()
     date_created = models.DateTimeField(default=now)
     start_date = models.DateField(blank=True, null=True)
     end_date = models.DateField(blank=True, null=True)
+    session_type = models.CharField(max_length=200, choices=session_choices, default=None)
     training_length = models.IntegerField(default=0)
     rating_training = models.IntegerField(choices=rating_choices, default=None)
     rating_facility = models.IntegerField(choices=rating_choices, default=None)

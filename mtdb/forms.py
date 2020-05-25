@@ -56,9 +56,10 @@ class ReviewCreateForm(forms.ModelForm):
 
     class Meta:
         model = Review
-        fields = ['gym', 'content', 'start_date', 'end_date', 'rating_training', 
+        fields = ['gym', 'content', 'session_type', 'start_date', 'end_date', 'rating_training', 
                     'rating_facility', 'rating_location', 'rating_cost', 'rating_overall']
         widgets = {
+            'session_type': forms.RadioSelect(attrs={'class': 'custom-control-input'}),
             'start_date': forms.DateInput(attrs={'type': 'date'}),
             'end_date': forms.DateInput(attrs={'type': 'date'}),
             'rating_training': forms.RadioSelect(attrs={'class': 'custom-control-input'}),
@@ -69,6 +70,7 @@ class ReviewCreateForm(forms.ModelForm):
             'content': forms.Textarea(attrs={'cols': '40', 'rows': '15'})
         }
         labels = {
+            'session_type': 'Session Type',
             'start_date': 'Training Start Date',
             'end_date': 'Training End Date',
             'rating_training': mark_safe('Rate the Training (Instruction, Trainers, Padwork, Sparring, Clinching, etc.) &#129354;'),
