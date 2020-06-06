@@ -73,8 +73,10 @@
               <a href="{% url 'update_review' review.id %}" class="update-review"><i class="far fa-edit edit"></i></a>
             </span>
             {% endif %}
-            <p class="user-date">{{ review.author }} <br>
-            <i>{{ review.date_created|date:"DATE_FORMAT"}}</i></p>
+            <p class="user-date">
+              <a href="{% url 'users:profile_detail' review.author.username %}">{{ review.author.username }}</a><br>
+              <i>{{ review.date_created|date:"DATE_FORMAT"}}</i>
+            </p>
           </div>
           {% if review.start_date and review.end_date %}
           <div class="training-dates text-muted">

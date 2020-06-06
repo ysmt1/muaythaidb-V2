@@ -212,6 +212,10 @@ form.register-form label {
     padding-left: 7px
 }
 
+.pf-view:disabled {
+    background-color: #fafbfc;
+}
+
 /**********************************************
 ************Contact page styles****************
 **********************************************/

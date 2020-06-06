@@ -21,5 +21,3 @@ class ProfileUpdateForm(forms.ModelForm):
         widgets = {
             'image': MyImageWidget
         }
-
-

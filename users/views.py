@@ -1,6 +1,6 @@
 from django.urls import reverse, reverse_lazy
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth import logout, views as auth_views
 from django.contrib.auth.decorators import login_required
@@ -43,7 +43,7 @@ def register_view(request):
     return render(request, 'users/register.html', {'form':form})
 
 @login_required
-def profile_view(request):
+def profile_edit(request):
     if request.method == "POST":
         u_form = UserUpdateForm(request.POST, instance = request.user)
         p_form = ProfileUpdateForm(request.POST, request.FILES, instance = request.user.profile)
@@ -52,7 +52,7 @@ def profile_view(request):
             u_form.save()
             p_form.save()
             messages.success(request, 'Your account has been updated!')
-            return redirect('users:profile')
+            return redirect('users:profile_edit')
     else:
         u_form = UserUpdateForm(instance = request.user)
         p_form = ProfileUpdateForm(instance = request.user.profile)
@@ -63,7 +63,22 @@ def profile_view(request):
         'p_form': p_form,
         'reviews': reviews
     }
-    return render(request, 'users/profile.html', context)
+    return render(request, 'users/profile_edit.html', context)
+
+@login_required
+def profile_detail(request, username):
+    user = get_object_or_404(User, username=username)
+    u_form = UserUpdateForm(instance = user)
+    p_form = ProfileUpdateForm(instance = user.profile)
+
+    reviews = Review.objects.filter(author=user).order_by('-date_created')
+    context = {
+        'user_profile': user,
+        'u_form': u_form,
+        'p_form': p_form,
+        'reviews': reviews
+    }
+    return render(request, 'users/profile_detail.html', context)
 
 def logout_view(request):
     logout(request)

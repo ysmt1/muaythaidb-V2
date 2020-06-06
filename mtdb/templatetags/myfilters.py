@@ -8,6 +8,10 @@ register = template.Library()
 def addclass(value, arg):
     return value.as_widget(attrs={'class': arg})
 
+@register.filter(name='input_disable')
+def input_disable(value):
+    return value.as_widget(attrs={'disabled': '', 'class': 'form-control pf-view'})
+
 @register.filter(name='get_by_index')
 def get_by_index(sequence, position):
     return sequence[position]

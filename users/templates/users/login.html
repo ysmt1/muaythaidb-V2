@@ -11,7 +11,7 @@
                 <img src="{% static 'mtdb/img/login.png' %}" class="img-fluid auth-img">
                 <div style="clear: left;"></div>
             </div>
-            <form action="{% url 'users:login' %}" , method="POST">
+            <form method="POST">
                 {% csrf_token %}
                 <div class="form-group">
                     <label for="{{ form.username.id_for_label }}" class="bold-label">Username </label>
