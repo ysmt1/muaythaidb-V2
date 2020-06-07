@@ -85,6 +85,9 @@
           {% endif %}
           <div class="review-badges my-1">
             <span class="badge badge-pill badge-success">{{ review.get_session_type_display }} Session</span>
+            {% if review.is_long_stay %}
+            <span class="badge badge-pill badge-info">Long Stay</span>
+            {% endif %}
           </div>
           <div class="overall-ratings my-1">
             <span class="rating-name-overall">Overall Rating: </span><span class="rating-star">{{ review.rating_overall}}</span>

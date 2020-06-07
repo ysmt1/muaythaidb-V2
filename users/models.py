@@ -12,11 +12,16 @@ class Profile(models.Model):
         ('intermediate', 'Intermediate'),
         ('advanced', 'Advanced')
     ]
+    FIGHTER_CHOICES = [
+        (None, 'Select...'),
+        ('amateur', 'Amateur'),
+        ('professional', 'Professional')
+    ]
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.ImageField(default='profile/default.png', upload_to=profile_img_path)
     location = models.CharField(max_length=200, blank=True)
     experience = models.CharField(max_length=200, choices=EXPERIENCE_CHOICES, blank=True)
-    fighter = models.CharField(max_length=200, blank=True)
+    fighter = models.CharField(max_length=200, choices=FIGHTER_CHOICES, blank=True)
     checkin = models.ForeignKey(Gym, null=True, blank=True, on_delete=models.SET_NULL)
 
     def __str__(self):

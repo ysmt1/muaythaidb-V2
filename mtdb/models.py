@@ -56,6 +56,11 @@ class Review(models.Model):
             return int(duration.days)
         return 0
 
+    def is_long_stay(self):
+        if self.start_date and self.end_date:
+            duration = self.end_date - self.start_date
+            return int(duration.days) >= 90
+
     def __str__(self):
         return f'Review for {self.gym.name} by {self.author.username}'
 

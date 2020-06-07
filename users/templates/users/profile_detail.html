@@ -72,7 +72,11 @@
                                 <div class="form-group col-md-6">
                                     {{ p_form.fighter.errors }}
                                     {{ p_form.fighter.label_tag }}
-                                    {{ p_form.fighter|input_disable }}
+                                    {% if user_profile.profile.fighter %}
+                                        {{ p_form.fighter|input_disable }}
+                                    {% else %}
+                                        <input type="text" disabled class="form-control pf-view">
+                                    {% endif %}
                                 </div>
                                 <div class="form-group col-md-6">
                                     {{ p_form.checkin.errors }}
