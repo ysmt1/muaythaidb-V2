@@ -40,8 +40,18 @@ $(document).ready(function () {
 
     // Table sorting function
     $('th').click(function () {
+        $('span.sort-icon').not(this).each(function() {
+            $(this).attr('style', '')
+        })
         icon = $(this).find('span.sort-icon')
         icon.html('<i class="fas fa-sort-up"></i>')
+        icon.css({
+            "opacity": ".5",
+            "display": "inline-block",
+            "position": "absolute",
+            "right": "5px"
+
+        })
         var table = $(this).parents('table').eq(0)
         this.asc = !this.asc
         var rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index(), !this.asc))

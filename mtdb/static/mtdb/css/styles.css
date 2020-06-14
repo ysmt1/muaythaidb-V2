@@ -435,6 +435,9 @@ p.user-date {
     .list-group-item:last-child {
         margin-bottom: -1px;
     }
+    span.show-sort {
+        display: none;
+    }
 }
 
 @media only screen and (max-width: 767px){
