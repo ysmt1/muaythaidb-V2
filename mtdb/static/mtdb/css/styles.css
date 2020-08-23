@@ -69,6 +69,10 @@ ul.errorlist.nonfield {
 .asteriskField {
     display: none;
 }
+
+.w-33 {
+    width: 33% !important;
+}
 /**********************************************
 ********Navbar and Content div styles**********
 **********************************************/
@@ -385,6 +389,22 @@ p.user-date {
 }
 
 /**********************************************
+******Trip calculator detail page styles*******
+**********************************************/
+table#costTable tbody tr td:nth-child(2),
+table#costTable tbody tr td:nth-child(3) {
+    text-align: right;
+}
+
+select#currencySelect {
+    width: auto;
+}
+
+div.toast button.close {
+    padding-top: 0px !important;
+    line-height: 0.8;
+}
+/**********************************************
 **************MEDIA QUERIES********************
 **********************************************/
 
@@ -438,6 +458,10 @@ p.user-date {
     span.show-sort {
         display: none;
     }
+    h5#estimate {
+        margin-top: .4rem;
+        margin-left: 1rem;
+    }
 }
 
 @media only screen and (max-width: 767px){
@@ -464,6 +488,10 @@ p.user-date {
     }
     .list-div {
         flex-direction: column;
+    }
+    h5#estimate {
+        margin-top: 0;
+        margin-left: 0;
     }
 }
 

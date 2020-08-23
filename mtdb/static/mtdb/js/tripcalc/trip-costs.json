@@ -1,0 +1,63 @@
+{
+    "trainingCosts": {
+        "once": {
+            "day": 400,
+            "week": 2000,
+            "month": 6000,
+            "year": 50000
+        },
+        "twice": {
+            "day": 700,
+            "week": 3000,
+            "month": 10000,
+            "year": 80000            
+        }
+    },
+    "livingCosts": {
+        "basic": {
+            "day": 300,
+            "week": 1500,
+            "month": 6000,
+            "year": 50000
+        },
+        "medium": {
+            "day": 800,
+            "week": 4000,
+            "month": 12000,
+            "year": 100000
+        },
+        "high": {
+            "day": 1500,
+            "week": 8000,
+            "month": 25000,
+            "year": 200000
+        }
+    },
+    "foodCosts": {
+        "thai": 200,
+        "mixed": 400,
+        "western": 800
+    },
+    "transportCosts": {
+        "motorbike": {
+            "day": 200,
+            "week": 1000,
+            "month": 3000,
+            "year": 30000            
+        },
+        "taxi": {
+            "seldom": 50,
+            "sometimes": 150,
+            "often": 300
+        }
+    },
+    "partyCosts": {
+        "no": 0,
+        "little": 100,
+        "yes": 300
+    },
+    "flightCosts": {
+        "no": 0,
+        "yes": 30000
+    }
+}

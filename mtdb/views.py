@@ -34,6 +34,9 @@ def index(request):
 def about(request):
     return render(request, 'mtdb/about.html')
 
+def trip_calc(request):
+    return render(request, 'mtdb/trip_calculator.html')
+
 def contact(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)

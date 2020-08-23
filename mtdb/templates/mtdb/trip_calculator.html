@@ -1,0 +1,205 @@
+{% extends 'mtdb/base.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+    <div class="col">
+        <div class="content-div">
+            <!-- <div class="row">
+                <div class="col">
+                    <h3 class="mb-4"><span class="light-underline">Trip Calculator</span></h3>
+                    <h5>Estimate how much your trip to Thailand will cost</h5>
+                </div>
+            </div> -->
+            <div class="row mt-3">
+                <div class="col-lg-6">
+                    <div class="row ml-1">
+                        <div>
+                            <h3 class="mb-3 light-underline">Trip Calculator</h3>
+                        </div>
+                        <div>
+                            <h5 id="estimate">Estimate how much your trip to Thailand will cost</h5>
+                        </div>
+                        <div class="mt-2 mb-2">
+                            <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false">
+                                <div class="toast-body">
+                                    Start calculator by entering trip duration
+                                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row ml-1 mt-1">
+                        <form id="tripCalcForm" class="mr-2">
+                            <div class="form-group">
+                                <label for="trainingLength">How long will your trip be? (ex. 5 days, 3 weeks, 7 months) </label>
+                                <input type="text" class="form-control" id="trainingLength">
+                            </div>
+                            <div class="form-group">
+                                <div class="radio-div-label mb-2">Do you plan on training 1x or 2x a day?</div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="trainingFreq1" name="trainingFreq" value="once" class="custom-control-input">
+                                    <label class="custom-control-label" for="trainingFreq1">Once</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="trainingFreq2" name="trainingFreq" value="twice" class="custom-control-input">
+                                    <label class="custom-control-label" for="trainingFreq2">Twice</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="livingRange">How comfortable would you like your accommodation?</label>
+                                <input type="range" class="custom-range" min="0" max="2" id="livingRange" value="0">
+                                <div class="range-labels d-flex">
+                                    <span class="w-33 text-left">Basic</span>
+                                    <span class="w-33 text-center">Comfortable</span>
+                                    <span class="w-33 text-right">Very Comfortable</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="foodRange">What will be your food preference?</label>
+                                <input type="range" class="custom-range" min="0" max="2" id="foodRange" value="0">
+                                <div class="range-labels d-flex">
+                                    <span class="w-33 text-left">Only Thai</span>
+                                    <span class="w-33 text-center">Mixed</span>
+                                    <span class="w-33 text-right">All Western/Foreign</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="transportRange">How often will you rely on taxis and other public transportation?</label>
+                                <input type="range" class="custom-range" min="0" max="2" id="transportRange" value="0">
+                                <div class="range-labels d-flex">
+                                    <span class="w-33 text-left">Seldom</span>
+                                    <span class="w-33 text-center">Sometimes</span>
+                                    <span class="w-33 text-right">Often</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="partyRange">Do you like to party?</label>
+                                <input type="range" class="custom-range" min="0" max="2" id="partyRange" value="0">
+                                <div class="range-labels d-flex">
+                                    <span class="w-33 text-left">No</span>
+                                    <span class="w-33 text-center">A Little</span>
+                                    <span class="w-33 text-right">Yes</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="radio-div-label mb-2">Will you be renting a motorbike/scooter?</div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="motoRent1" name="motoRent" class="custom-control-input" value="yes">
+                                    <label class="custom-control-label" for="motoRent1">Yes</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="motoRent2" name="motoRent" class="custom-control-input" value="no">
+                                    <label class="custom-control-label" for="motoRent2">No</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="radio-div-label mb-2">Do you want to include flight costs?</div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="flightCost1" name="flightCost" class="custom-control-input" value="yes">
+                                    <label class="custom-control-label" for="flightCost1">Yes</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="flightCost2" name="flightCost" class="custom-control-input" value="no">
+                                    <label class="custom-control-label" for="flightCost2">No</label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="row">
+                        <div class="cost-title mb-4 ml-3">
+                            <h3 class="light-underline">Cost Summary</h3>  
+                        </div>
+                        <div class="select-currency ml-auto mr-2">
+                            <select class="custom-select" id="currencySelect">
+                                <option value="USD" selected>USD</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <table class="table table-sm table-bordered ml-3 mr-2" id="costTable">
+                            <thead>
+                                <tr>
+                                    <th scope="col" style="width: 36%">Category</th>
+                                    <th scope="col" style="width: 32%">Cost in Baht</th>
+                                    <th scope="col" style="width: 32%">
+                                        Cost in 
+                                        <span id="selectedCurrency">USD</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Training</td>
+                                    <td id="trainingCostCell">0</td>
+                                    <td id="trainingCostCellConvert">0</td>
+                                </tr>
+                                <tr>
+                                    <td>Accommodation</td>
+                                    <td id="livingCostCell">0</td>
+                                    <td id="livingCostCellConvert">0</td>
+                                </tr>
+                                <tr>
+                                    <td>Food</td>
+                                    <td id="foodCostCell">0</td>
+                                    <td id="foodCostCellConvert">0</td>
+                                </tr>
+                                <tr>
+                                    <td>Transportation</td>
+                                    <td id="transportCostCell">0</td>
+                                    <td id="transportCostCellConvert">0</td>
+                                </tr>
+                                <tr>
+                                    <td>Entertainment</td>
+                                    <td id="partyCostCell">0</td>
+                                    <td id="partyCostCellConvert">0</td>
+                                </tr>
+                                <tr>
+                                    <td>Travel</td>
+                                    <td id="flightCostCell">0</td>
+                                    <td id="flightCostCellConvert">0</td>
+                                </tr>
+                                <tr>
+                                    <td>Misc</td>
+                                    <td id="miscCostCell">0</td>
+                                    <td id="miscCostCellConvert">0</td>
+                                </tr>
+                                <tr>
+                                    <td>Total</td>
+                                    <td id="totalCostCell">0</td>
+                                    <td id="totalCostCellConvert">0</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <span id="displayTrainingCost"></span>
+                    </div>
+                    <div class="row">
+                        <canvas id="myChart" width="300" height="300"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+    const staticURL = "{% static 'mtdb/js/tripcalc' %}"
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"
+    integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg=="
+    crossorigin="anonymous"></script>
+<script src="{% static 'mtdb/js/tripcalc/costChart.js' %}"></script>
+<script src="{% static 'mtdb/js/tripcalc/currency.js' %}"></script>
+<script src="{% static 'mtdb/js/tripcalc/helpers.js' %}"></script>
+<script src="{% static 'mtdb/js/tripcalc/cost-functions.js' %}"></script>
+<script src="{% static 'mtdb/js/tripcalc/main.js' %}"></script>
+<script>
+    $(document).ready(function () {
+        $('.toast').toast('show');
+    });
+</script>
+{% endblock %}
