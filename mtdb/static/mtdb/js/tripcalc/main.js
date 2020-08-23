@@ -15,7 +15,7 @@ const costMultiplier = {
 // Read in training prices from trip-costs.json file
 function getCostsJSON(callback) {
     let request = new XMLHttpRequest();
-    request.open("GET", staticURL + "/trip-costs.json", true);
+    request.open("GET", "/static/mtdb/js/tripcalc/trip-costs.json", true);
     request.onload = function() {
         if (this.status >= 200 && this.status < 400) {
             var data = JSON.parse(this.response);
