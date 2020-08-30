@@ -2,7 +2,7 @@
 
 Muay Thai DB is a web app created for users to create and review Muay Thai gyms in Thailand
 
-With many Nak Muay (practitioners) from all over the world traveling to Thailand to train, I thought a centralized place for reviews would be helpful for people trying to choose a gym.  
+With many hobbyists and professionals from all over the world traveling to Thailand to train this amazing martial art, I thought a centralized place for reviews would be helpful for people trying to choose a gym.  
 
 V1 - Built using Flask framework https://github.com/ysmt1/muaythaidb
 
@@ -18,9 +18,11 @@ Guest Account Username: guest
 Guest Account Password: 1234test
 
 ## Features
-* User Creation and Authentication
-* Create, Update, Delete Reviews with Optional Image Attachment
-* Live Table Filtering and Searching
+* User creation and authentication
+* Create, update, delete reviews with optional image attachment
+* Like/unlike reviews
+* Live table filtering and searching
+* Trip calculator to estimate how much a training trip to Thailand would cost
 
 ## Languages and Technologies
 * Python
@@ -33,6 +35,7 @@ Guest Account Password: 1234test
 * Amazon S3
 * Heroku
 * Google Maps API
+* [Foreign exchange rates API](https://exchangeratesapi.io/)
 
 ## Libaries Used
 * [Boto3](https://pypi.org/project/boto3/)
@@ -42,3 +45,4 @@ Guest Account Password: 1234test
 * [Django Storages](https://pypi.org/project/django-storages/)
 * [Gunicorn](https://pypi.org/project/gunicorn/)
 * [Pillow](https://pypi.org/project/Pillow/)
+* [Chart.js](https://www.chartjs.org/)
