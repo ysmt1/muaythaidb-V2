@@ -54,7 +54,7 @@ function formatCurrency(value, currency) {
 
 // Clean user input and extract number and duration unit from length of trip
 function cleanInput(input) {
-    let cleanedStr = input.replace(" ", "");
+    let cleanedStr = input.trim().replace(/ /g, "");
     let splitStr = cleanedStr.split(/(\D+)/);
     tripLenInt = parseInt(splitStr[0]);
     tripLenUnit = splitStr[1].replace("s", "");
