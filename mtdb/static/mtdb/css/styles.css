@@ -232,6 +232,10 @@ form.register-form label {
     background-color: #fafbfc;
 }
 
+.hidden-field {
+    display: none;
+}
+
 /**********************************************
 ************Review form page styles************
 **********************************************/
@@ -391,6 +395,7 @@ p.user-date {
 /**********************************************
 ******Trip calculator detail page styles*******
 **********************************************/
+
 table#costTable tbody tr td:nth-child(2),
 table#costTable tbody tr td:nth-child(3) {
     text-align: right;

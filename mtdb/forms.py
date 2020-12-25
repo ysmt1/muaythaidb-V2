@@ -11,6 +11,7 @@ class ContactForm(forms.Form):
     name = forms.CharField(max_length=200, required=False)
     email = forms.EmailField()
     message = forms.CharField(widget=forms.Textarea)
+    hidden = forms.CharField(required=False)
 
     def __init__(self, *args, **kwargs):
         super(ContactForm, self).__init__(*args, **kwargs)
@@ -19,13 +20,15 @@ class ContactForm(forms.Form):
         self.helper.form_class = 'contact-form'
         self.helper.form_method = 'POST'
         self.helper.label_class = 'bold-label'
+        self.fields['hidden'].label = False
 
         self.helper.add_input(Submit('submit', 'Submit'))
 
         self.helper.layout = Layout(
             Field('name', css_class="contact-name"),
             Field('email', css_class="contact-email"),
-            Field('message', css_class="contact-message")
+            Field('message', css_class="contact-message"),
+            Field('hidden', css_class="hidden-field")
         )
 
 class AddGymForm(forms.Form):

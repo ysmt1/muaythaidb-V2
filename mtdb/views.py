@@ -45,9 +45,12 @@ def contact(request):
             name = form.cleaned_data['name']
             email = form.cleaned_data['email']
             message = form.cleaned_data['message']
+            hidden = form.cleaned_data['hidden']
             subject = f"MTDB, message from {email} ({name})"
-
-            send_mail(subject, message, "", [os.environ.get('EMAIL_TO')])
+            
+            if not hidden:
+                send_mail(subject, message, "", [os.environ.get('EMAIL_TO')])
+                
             messages.success(request, 'Message Sent! Will Reply Shortly')
             return HttpResponseRedirect(reverse('index'))
     else:
