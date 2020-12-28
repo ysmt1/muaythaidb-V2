@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.com/ysmt1/muaythaidb-V2.svg?branch=master)](https://travis-ci.com/ysmt1/muaythaidb-V2)
 # muaythaidb-V2
 
 Muay Thai DB is a web app created for users to create and review Muay Thai gyms in Thailand
