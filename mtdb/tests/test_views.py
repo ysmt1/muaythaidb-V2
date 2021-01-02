@@ -1,9 +1,11 @@
 import datetime
-from django.test import TestCase, Client
+
+from django.test import Client
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 from mtdb.models import Location, Gym, Review, Like
-from test_base import BaseTestCase
+from mtdb.tests.test_base import BaseTestCase
 
 class ViewsTestCase(BaseTestCase):
 
@@ -47,10 +49,17 @@ class ViewsTestCase(BaseTestCase):
 
         self.assertEqual(response.status_code, 200)
 
-    def test_review_get(self):
+    def test_review_logged_in(self):
 
         response = self.client.get("/review/")
         self.assertEqual(response.status_code, 200)
+
+    def test_review_logged_out(self):
+
+        self.client.logout()
+        response = self.client.get("/review/")
+        
+        self.assertRedirects(response, '/users/login/?next=/review/')
 
     def test_review_post(self):
         '''
@@ -76,3 +85,24 @@ class ViewsTestCase(BaseTestCase):
 
         self.assertEqual(response.url, "/")
 
+    def test_review_delete_success(self):
+        '''
+        Delete review by review author
+        '''
+        
+        response = self.client.post(reverse('delete_review', args=[self.review_1.id]), follow=True)
+
+        self.assertEqual(response.status_code, 200)
+
+    def test_review_delete_forbidden(self):
+        '''
+        Logout original user, try to delete review by non author.  Should return forbidden response
+        '''
+        self.client.logout()
+
+        user = User.objects.get(username='test_user_2')
+        self.client.force_login(user)
+
+        response = self.client.post(reverse('delete_review', args=[self.review_2.id]))
+
+        self.assertEqual(response.status_code, 403)

@@ -1,5 +1,5 @@
 from mtdb.models import Location, Gym, Review, Like
-from test_base import BaseTestCase
+from mtdb.tests.test_base import BaseTestCase
 
 class ModelsTestCase(BaseTestCase):
 

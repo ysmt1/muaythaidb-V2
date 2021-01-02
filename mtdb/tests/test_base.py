@@ -10,6 +10,7 @@ class BaseTestCase(TestCase):
 
         # Create test user
         user = User.objects.create_user(username='test_user', password='test_password', email='testemail@email.com')
+        user_2 = User.objects.create_user(username='test_user_2', password='test_password', email='testemail2@email.com')
 
         # Create locations
         loc_1 = Location.objects.create(city='City A', country='Country A')
