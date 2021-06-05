@@ -1,8 +1,8 @@
 // set endpoint and your access key
 // const baseCur = 'USD';
-const access_key = '8ae10ac669309c6d020dab26f2c4a85d';
-const endpoint = 'http://api.exchangeratesapi.io/v1/latest?access_key=' + access_key // + '&base=' + baseCur
-// let symbols = 'USD,THB,JPY,GBP,AUD,CAD';
+const app_id = 'c5dd7943f6cf4c3f8b06d171079f63a0';
+const endpoint = 'https://openexchangerates.org/api/latest.json?app_id=' + app_id
+
 let currencyObj;
 let thaiBase;
 const emptyObj = {
@@ -12,10 +12,6 @@ const emptyObj = {
     }
 };
 const curRequest = new XMLHttpRequest();
-
-//Fixer.io
-//curRequest.open('GET', 'http://data.fixer.io/api/' + endpoint + '?access_key=' + access_key + '&symbols=' + symbols, true);
-//exchangeratesapi.io
 
 function getCurrencyRates() {
     curRequest.open('GET', endpoint, true);
@@ -28,7 +24,7 @@ function getCurrencyRates() {
             try {
                 currencyObj = JSON.parse(resp);
                 thaiBase = currencyObj.rates["THB"];
-                convertEurToBaht(currencyObj.rates)
+                convertUsdToBaht(currencyObj.rates)
             } catch {
                 console.log("An error has occured when parsing response from the exhange rates API");
                 currencyObj = emptyObj;
@@ -64,7 +60,7 @@ function populateCurrencyOptions(obj) {
     })
 }
 
-function convertEurToBaht(obj) {
+function convertUsdToBaht(obj) {
     Object.keys(obj).forEach(function(key) {
         obj[key] = obj[key] / thaiBase;
     })
