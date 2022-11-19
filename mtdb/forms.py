@@ -4,6 +4,7 @@ from django.utils.safestring import mark_safe
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Fieldset, ButtonHolder, Field, HTML
 from crispy_forms.bootstrap import StrictButton
+from captcha.fields import CaptchaField
 from users.forms import MyImageWidget
 from .models import Review, Gym, ReviewImage
 
@@ -12,6 +13,7 @@ class ContactForm(forms.Form):
     email = forms.EmailField()
     message = forms.CharField(widget=forms.Textarea)
     hidden = forms.CharField(required=False)
+    captcha = CaptchaField()
 
     def __init__(self, *args, **kwargs):
         super(ContactForm, self).__init__(*args, **kwargs)
@@ -21,13 +23,14 @@ class ContactForm(forms.Form):
         self.helper.form_method = 'POST'
         self.helper.label_class = 'bold-label'
         self.fields['hidden'].label = False
-
+        self.fields['captcha'].label = 'Verify You Are Human'
         self.helper.add_input(Submit('submit', 'Submit'))
 
         self.helper.layout = Layout(
             Field('name', css_class="contact-name"),
             Field('email', css_class="contact-email"),
             Field('message', css_class="contact-message"),
+            Field('captcha', css_class="contact-captcha"),
             Field('hidden', css_class="hidden-field")
         )
 

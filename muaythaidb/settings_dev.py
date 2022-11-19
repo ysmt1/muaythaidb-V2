@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms',
     'storages',
-    'django_cleanup.apps.CleanupConfig'
+    'django_cleanup.apps.CleanupConfig',
+    'captcha'
 ]
 
 MIDDLEWARE = [
@@ -144,4 +145,5 @@ AWS_STORAGE_BUCKET_NAME = 'mtdb-dj'
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge'
 

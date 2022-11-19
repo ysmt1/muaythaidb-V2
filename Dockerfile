@@ -2,6 +2,7 @@ ARG PYTHON_VERSION=3.7.9
 
 FROM python:${PYTHON_VERSION}
 
+ARG DJANGO_SETTINGS_MODULE
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
@@ -18,7 +19,8 @@ RUN set -ex && \
 
 COPY . /code/
 
-RUN python manage.py collectstatic --noinput
+RUN --mount=type=secret,id=SECRET_KEY SECRET_KEY="$(cat /run/secrets/SECRET_KEY)" \
+    python manage.py collectstatic --noinput
 
 EXPOSE 8000
 
