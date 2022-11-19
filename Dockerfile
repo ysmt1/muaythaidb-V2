@@ -19,7 +19,7 @@ RUN set -ex && \
 
 COPY . /code/
 
-RUN --mount=type=secret,id=SECRET_KEY SECRET_KEY="$(cat /run/secrets/SECRET_KEY)" \
+RUN --mount=type=secret,id=SECRET_KEY_DJANGO SECRET_KEY_DJANGO="$(cat /run/secrets/SECRET_KEY_DJANGO)" \
     python manage.py collectstatic --noinput
 
 EXPOSE 8000
